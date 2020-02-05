@@ -30,7 +30,6 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = imutils.resize(image, width = 28)
     image = img_to_array(image)
-    print(image)
     data.append(image)
 
     # extract the class label from the image path and update the label list
