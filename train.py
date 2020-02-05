@@ -27,7 +27,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     # load the image, pre-process it, and store it in the data list
     image = cv2.imread(imagePath)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = imutils.resize(image, width = 28)
+    # image = imutils.resize(image, width = 28)
     image = img_to_array(image)
     data.append(image)
 
@@ -57,7 +57,7 @@ classWeight = classTotals.max() / classTotals
 
 # initialize the model
 print("[INFO] compiling model...")
-model = LeNet.build(width = 28, height = 28, depth = 1, classes = 2)
+model = LeNet.build(width = 128, height = 128, depth = 1, classes = 2)
 model.compile(loss = "binary_crossentropy", optimizer = "adam",
     metrics = ["accuracy"])
 
