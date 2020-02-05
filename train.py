@@ -26,10 +26,12 @@ labels = []
 # loop over the input images
 for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     # load the image, pre-process it, and store it in the data list
+    print(imagePath)
     image = cv2.imread(imagePath)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image = imutils.resize(image, width = 28)
     image = img_to_array(image)
+    print(image)
     data.append(image)
 
     # extract the class label from the image path and update the label list
@@ -38,6 +40,8 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     labels.append(label)
 
 # scale the raw pixel intensities to the range [0, 1]
+print(data)
+print(labels)
 data = np.array(data, dtype = "float") / 255.0
 labels = np.array(labels)
 
