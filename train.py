@@ -39,7 +39,6 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
 # scale the raw pixel intensities to the range [0, 1]
 print(data[0])
 print(data[len(data)-1])
-print(labels)
 data = np.array(data, dtype = "float") / 255.0
 labels = np.array(labels)
 
