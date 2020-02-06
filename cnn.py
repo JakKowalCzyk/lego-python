@@ -11,7 +11,7 @@ class CNN:
     def build():
 
         model = Sequential()
-        model.add(Conv2D(filters = 16, kernel_size = 2,input_shape=(100,100,3),padding='same'))
+        model.add(Conv2D(filters = 16, kernel_size = 2,input_shape=(64,64,1),padding='same'))
         model.add(Activation('relu'))
         model.add(MaxPooling2D(pool_size=2))
 
@@ -29,6 +29,6 @@ class CNN:
         model.add(Dense(150))
         model.add(Activation('relu'))
         model.add(Dropout(0.4))
-        model.add(Dense(81,activation = 'softmax'))
+        model.add(Dense(2,activation = 'softmax'))
         model.summary()
         return model

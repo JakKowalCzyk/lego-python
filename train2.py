@@ -40,8 +40,9 @@ labels = []
 for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     # load the image, pre-process it, and store it in the data list
     image = cv2.imread(imagePath)
-    # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = imutils.resize(image, width=28, height=28)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # image = imutils.resize(image, width=64, height=64)
+    image = cv2.resize(image, (64, 64))
     image = img_to_array(image)
     data.append(image)
 
@@ -50,15 +51,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     label = "Legos" if label == "Legos" else "Bricks"
     labels.append(label)
 
-# scale the raw pixel intensities to the range [0, 1]
-# data = np.array(data)
-# data = data.astype('float32')/255.0
-train = data
-data =[]
-for arr in train:
-    newarr = np.array(arr, dtype="float32") / 255.0
-    data.append(newarr)
-# data = np.array(data, dtype="float32") / 255.0
+data = np.array(data, dtype=np.float32)
 labels = np.array(labels)
 
 # convert the labels from integers to vectors
