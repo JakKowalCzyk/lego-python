@@ -42,7 +42,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     image = cv2.imread(imagePath)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # image = imutils.resize(image, width=64, height=64)
-    image = cv2.resize(image, (64, 64))
+    image = cv2.resize(image, (128,128))
     image = img_to_array(image)
     data.append(image)
 
