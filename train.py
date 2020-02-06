@@ -44,18 +44,24 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
 data = np.array(data, dtype=np.float32)
 labels = np.array(labels)
 
+print(labels[0:10])
 # convert the labels from integers to vectors
 le = LabelEncoder().fit(labels)
+print(le[0:10])
 labels = np_utils.to_categorical(le.transform(labels), 2)
 
 # account for skew in the labeled data
 classTotals = labels.sum(axis = 0)
 classWeight = classTotals.max() / classTotals
-
+print(classTotals)
+print(classWeight)
 # partition the data into training and testing splits using 80% of the data
 # for training and remaining 20% for testing
 (trainX, testX, trainY, testY) = train_test_split(data, labels,
     test_size = 0.20, stratify = labels, random_state = 42)
+
+print(trainY[0:50])
+print(testY[0:50])
 
 # initialize the model
 print("[INFO] compiling model...")
