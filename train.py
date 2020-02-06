@@ -44,10 +44,10 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
 data = np.array(data, dtype=np.float32)
 labels = np.array(labels)
 
-print(labels[0:10])
+print(labels[0:1000])
 # convert the labels from integers to vectors
 le = LabelEncoder().fit(labels)
-print(le[0:10])
+print(le)
 labels = np_utils.to_categorical(le.transform(labels), 2)
 
 # account for skew in the labeled data
