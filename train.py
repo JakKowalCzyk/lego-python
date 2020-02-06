@@ -66,7 +66,7 @@ print(testY)
 
 # initialize the model
 print("[INFO] compiling model...")
-sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+sgd = SGD(lr=0.1, decay=1e-6, momentum=0.9, nesterov=True)
 
 model = LeNet.build(width = 64, height = 64, depth = 1, classes = 2)
 model.compile(loss = "categorical_crossentropy", optimizer = sgd,
