@@ -78,7 +78,7 @@ print("[INFO] training network...")
 checkpointer = ModelCheckpoint(filepath = 'cnn_from_scratch_fruits.hdf5', verbose = 1, save_best_only = True)
 H = model.fit(trainX,trainY,
         batch_size = 32,
-        epochs=60,
+        epochs=100,
         validation_data=(testX, testY),
         callbacks = [checkpointer],
         verbose=2, shuffle=True)
