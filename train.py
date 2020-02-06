@@ -13,6 +13,7 @@ import os
 from keras.preprocessing.image import array_to_img, img_to_array, load_img
 from lenet import LeNet
 from sklearn.datasets import load_files
+from keras.optimizers import SGD
 
 # construct argument parser and parse the argument
 ap = argparse.ArgumentParser()
@@ -65,14 +66,16 @@ print(testY)
 
 # initialize the model
 print("[INFO] compiling model...")
+opt = SGD(lr=0.01)
+
 model = LeNet.build(width = 128, height = 128, depth = 1, classes = 2)
-model.compile(loss = "binary_crossentropy", optimizer = "adam",
+model.compile(loss = "binary_crossentropy", optimizer = opt,
     metrics = ["accuracy"])
 
 # train the network
 print("[INFO] training network...")
 H = model.fit(trainX, trainY, validation_data = (testX, testY),
-    class_weight = classWeight, batch_size = 34, epochs = 140, verbose = 1)
+    class_weight = classWeight, batch_size = 34, epochs = 30, verbose = 1)
 
 # evaluate the network
 print("[INFO] evaluating network...")
