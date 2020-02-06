@@ -44,7 +44,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
 data = np.array(data, dtype=np.float32)
 labels = np.array(labels)
 
-print(labels[5000:6000])
+print(labels)
 # convert the labels from integers to vectors
 le = LabelEncoder().fit(labels)
 print(le)
@@ -60,8 +60,8 @@ print(classWeight)
 (trainX, testX, trainY, testY) = train_test_split(data, labels,
     test_size = 0.20, stratify = labels, random_state = 42)
 
-print(trainY[0:50])
-print(testY[0:50])
+# print(trainY[0:50])
+# print(testY[0:50])
 
 # initialize the model
 print("[INFO] compiling model...")
@@ -72,7 +72,7 @@ model.compile(loss = "binary_crossentropy", optimizer = "adam",
 # train the network
 print("[INFO] training network...")
 H = model.fit(trainX, trainY, validation_data = (testX, testY),
-    class_weight = classWeight, batch_size = 32, epochs = 15, verbose = 1)
+    class_weight = classWeight, batch_size = 32, epochs = 2, verbose = 1)
 
 # evaluate the network
 print("[INFO] evaluating network...")
