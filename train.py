@@ -69,13 +69,13 @@ print("[INFO] compiling model...")
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 model = LeNet.build(width = 64, height = 64, depth = 1, classes = 2)
-model.compile(loss = "categorical_crossentropy", optimizer = 'rmsprop',
+model.compile(loss = "categorical_crossentropy", optimizer = sgd,
     metrics = ["accuracy"])
 
 # train the network
 print("[INFO] training network...")
 H = model.fit(trainX, trainY, validation_data = (testX, testY),
-    class_weight = classWeight, batch_size = 34, epochs = 100, verbose = 1)
+    class_weight = classWeight, batch_size = 34, epochs = 40, verbose = 1)
 
 # evaluate the network
 print("[INFO] evaluating network...")
