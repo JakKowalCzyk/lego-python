@@ -44,7 +44,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
 data = np.array(data, dtype=np.float32)
 labels = np.array(labels)
 
-print(labels[0:1000])
+print(labels[5000:6000])
 # convert the labels from integers to vectors
 le = LabelEncoder().fit(labels)
 print(le)
