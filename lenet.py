@@ -23,7 +23,7 @@ class LeNet:
         model.add(MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))
 
         # second set of CONV => RELU => POOL layers
-        model.add(Conv2D(32 , (3, 3), padding = "same"))
+        model.add(Conv2D(64 , (3, 3), padding = "same"))
         model.add(Activation("relu"))
         model.add(MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))
 
