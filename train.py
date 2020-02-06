@@ -72,7 +72,7 @@ model.compile(loss = "binary_crossentropy", optimizer = "adam",
 # train the network
 print("[INFO] training network...")
 H = model.fit(trainX, trainY, validation_data = (testX, testY),
-    class_weight = classWeight, batch_size = 64, epochs = 14, verbose = 1)
+    class_weight = classWeight, batch_size = 34, epochs = 140, verbose = 1)
 
 # evaluate the network
 print("[INFO] evaluating network...")
