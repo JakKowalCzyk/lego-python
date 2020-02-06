@@ -14,6 +14,7 @@ from keras.preprocessing.image import array_to_img, img_to_array, load_img
 from lenet import LeNet
 from sklearn.datasets import load_files
 from keras.optimizers import SGD
+from sklearn.utils import compute_class_weight
 
 # construct argument parser and parse the argument
 ap = argparse.ArgumentParser()
@@ -52,9 +53,11 @@ print(le)
 labels = np_utils.to_categorical(le.transform(labels), 2)
 
 # account for skew in the labeled data
-classTotals = labels.sum(axis = 0)
-classWeight = classTotals.max() / classTotals
-print(classTotals)
+# classTotals = labels.sum(axis = 0)
+# classWeight = classTotals.max() / classTotals
+classWeight = compute_class_weight('balanced', labels, data)
+classWeight = dict(enumerate(classWeight))
+# print(classTotals)
 print(classWeight)
 # partition the data into training and testing splits using 80% of the data
 # for training and remaining 20% for testing
