@@ -66,10 +66,10 @@ print(testY)
 
 # initialize the model
 print("[INFO] compiling model...")
-opt = SGD(lr=0.01)
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 model = LeNet.build(width = 128, height = 128, depth = 1, classes = 2)
-model.compile(loss = "binary_crossentropy", optimizer = opt,
+model.compile(loss = "binary_crossentropy", optimizer = sgd,
     metrics = ["accuracy"])
 
 # train the network
