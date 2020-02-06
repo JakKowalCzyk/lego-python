@@ -10,6 +10,9 @@ import argparse
 import imutils
 import cv2
 import os
+from keras.preprocessing.image import array_to_img, img_to_array, load_img
+from lenet import LeNet
+from sklearn.datasets import load_files
 
 # construct argument parser and parse the argument
 ap = argparse.ArgumentParser()
@@ -21,7 +24,17 @@ args = vars(ap.parse_args())
 # initialize the list of data and labels
 data = []
 labels = []
-
+#
+# def convert_image_to_array(files):
+#     images_as_array=[]
+#     for file in files:
+#         # Convert to Numpy Array
+#         images_as_array.append(img_to_array(load_img(file)))
+#     return images_as_array
+#
+# data = load_files(args["dataset"])
+# files = np.array(data['filenames'])
+# train = np.array(convert_image_to_array(files))
 # loop over the input images
 for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     # load the image, pre-process it, and store it in the data list
@@ -37,11 +50,8 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     labels.append(label)
 
 # scale the raw pixel intensities to the range [0, 1]
-print(data[0])
-print(data[len(data)-1])
-# data = np.array(data, dtype = "float") / 255.0
-data = np.array(data)
-data = data.astype('float32')/255
+data = np.array(data) / 255.0
+# train = train.astype('float32')/255
 labels = np.array(labels)
 
 # convert the labels from integers to vectors
