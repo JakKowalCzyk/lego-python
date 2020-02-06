@@ -51,7 +51,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     label = "Legos" if label == "Legos" else "Bricks"
     labels.append(label)
 
-data = np.array(data, dtype=np.float32)
+data = np.array(data, dtype=np.float32) / 255.0
 labels = np.array(labels)
 
 # convert the labels from integers to vectors
