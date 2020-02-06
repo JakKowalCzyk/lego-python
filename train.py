@@ -37,7 +37,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     data.append(image)
 
     # extract the class label from the image path and update the label list
-    label = imagePath.split(os.path.sep)[-3]
+    label = imagePath.split(os.path.sep)[-2]
     print(label)
     label = "Legos" if label == "Legos" else "Bricks"
     labels.append(label)
