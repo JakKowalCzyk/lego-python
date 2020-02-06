@@ -50,8 +50,14 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     labels.append(label)
 
 # scale the raw pixel intensities to the range [0, 1]
-data = np.array(data) / 255.0
+# data = np.array(data) / 255.0
 # train = train.astype('float32')/255
+train = data
+data =[]
+for arr in train:
+    newarr = np.array(arr, dtype="float32") / 255.0
+    data.append(newarr)
+# data = np.array(data, dtype="float32") / 255.0
 labels = np.array(labels)
 
 # convert the labels from integers to vectors
