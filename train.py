@@ -75,7 +75,7 @@ model.compile(loss = "categorical_crossentropy", optimizer = 'rmsprop',
 # train the network
 print("[INFO] training network...")
 H = model.fit(trainX, trainY, validation_data = (testX, testY),
-    class_weight = classWeight, batch_size = 34, epochs = 30, verbose = 1)
+    class_weight = classWeight, batch_size = 34, epochs = 100, verbose = 1)
 
 # evaluate the network
 print("[INFO] evaluating network...")
