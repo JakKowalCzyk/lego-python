@@ -2,7 +2,8 @@ import argparse
 import os
 
 from keras import Input
-from keras.applications.vgg16 import preprocess_input
+from keras.applications import InceptionV3
+from keras.applications.inception_v3 import preprocess_input
 from keras.applications.vgg16 import decode_predictions
 from keras.applications.vgg16 import VGG16
 import cv2
@@ -77,7 +78,7 @@ print("[INFO] compiling model...")
 # sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 new_input = Input(shape=(64, 64, 3))
-model = VGG16(weights=None, input_tensor=new_input, classes=2)
+model = InceptionV3(weights=None, input_tensor=new_input, classes=2)
 model.compile(loss="categorical_crossentropy", optimizer="adam",
               metrics=["accuracy"])
 
