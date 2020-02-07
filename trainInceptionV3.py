@@ -38,7 +38,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # image = imutils.resize(image, width=64, height=64)
     # image = cv2.resize(image, (64, 64))
-    image = load_img(imagePath, target_size=(64,64))
+    image = load_img(imagePath, target_size=(128,128))
     image = img_to_array(image)
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     # prepare the image for the VGG model
@@ -77,7 +77,7 @@ print(testY)
 print("[INFO] compiling model...")
 # sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
-new_input = Input(shape=(64, 64, 3))
+new_input = Input(shape=(128, 128, 3))
 model = InceptionV3(weights=None, input_tensor=new_input, classes=2)
 model.compile(loss="categorical_crossentropy", optimizer="adam",
               metrics=["accuracy"])
