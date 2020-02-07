@@ -75,7 +75,7 @@ print("[INFO] compiling model...")
 
 new_input = Input(shape=(128, 128, 3))
 model = InceptionV3(weights=None, input_tensor=new_input, classes=2)
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+model.compile(loss="categorical_crossentropy", optimizer="rmsprop", metrics=["accuracy"])
 
 # train the network
 print("[INFO] training network...")
