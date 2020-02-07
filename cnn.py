@@ -11,7 +11,7 @@ class CNN:
     def build():
 
         model = Sequential()
-        model.add(Conv2D(filters = 32, kernel_size = (1,1),input_shape=(128,128,1),padding='same'))
+        model.add(Conv2D(filters = 32, kernel_size = (1,1),input_shape=(64,64,1),padding='same'))
         model.add(Activation('relu'))
         model.add(MaxPooling2D(pool_size=2))
 
