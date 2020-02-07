@@ -69,14 +69,13 @@ classWeight = classTotals.max() / classTotals
 
 # initialize the model
 print("[INFO] compiling model...")
-
 model = CNN.build()
 model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
+              optimizer='rmsprop',
               metrics=['accuracy'])
 # train the network
 print("[INFO] training network...")
-checkpointer = ModelCheckpoint(filepath = 'cnn_lego.hdf5', verbose = 1, save_best_only = True)
+checkpointer = ModelCheckpoint(filepath = 'lego.hdf5', verbose = 1, save_best_only = True)
 H = model.fit(trainX,trainY,
         batch_size = 32,
         epochs=40,
@@ -98,7 +97,7 @@ plt.style.use("ggplot")
 plt.figure()
 plt.plot(np.arange(0, 40), H.history["loss"], label = "train_loss")
 plt.plot(np.arange(0, 40), H.history["val_loss"], label = "val_loss")
-plt.plot(np.arange(0, 40), H.history["accuracy"], label = "accuracy")
+plt.plot(np.arange(0, 40), H.history["accuracy"], label = "acc")
 plt.plot(np.arange(0, 40), H.history["val_accuracy"], label = "val_acc")
 plt.title("Training Loss and Accuracy")
 plt.xlabel("Epoch #")
