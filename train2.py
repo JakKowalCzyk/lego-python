@@ -81,7 +81,7 @@ H = model.fit(trainX,trainY,
         epochs=40,
         validation_data=(testX, testY),
         callbacks = [checkpointer],
-        verbose=2, shuffle=True)
+        verbose=1, shuffle=True)
 
 # evaluate the network
 print("[INFO] evaluating network...")

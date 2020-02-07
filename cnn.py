@@ -21,7 +21,7 @@ class CNN:
         model.add(Conv2D(filters = 64,kernel_size = (3,3),activation= 'relu',padding='same'))
         model.add(MaxPooling2D(pool_size=2))
 
-        model.add(Conv2D(filters = 128,kernel_size = (3,3),activation= 'relu',padding='same'))
+        model.add(Conv2D(filters = 128,kernel_size = (5,5),activation= 'relu',padding='same'))
         model.add(MaxPooling2D(pool_size=2))
 
         model.add(Dropout(0.3))
