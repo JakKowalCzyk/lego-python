@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from keras import Input, Sequential
+from keras import Input
 from keras.applications.vgg16 import preprocess_input
 from keras.applications.vgg16 import decode_predictions
 from keras.applications.vgg16 import VGG16
@@ -9,7 +9,6 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from imutils import paths
-from keras.layers import Flatten, Dense, Dropout
 from keras.optimizers import SGD
 from keras.preprocessing.image import img_to_array, load_img
 from keras.utils import np_utils
@@ -38,7 +37,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # image = imutils.resize(image, width=64, height=64)
     # image = cv2.resize(image, (64, 64))
-    image = load_img(imagePath, target_size=(64,64))
+    image = load_img(imagePath, target_size=(224,224))
     image = img_to_array(image)
     # image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     # prepare the image for the VGG model
@@ -79,17 +78,7 @@ print("[INFO] compiling model...")
 # sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 new_input = Input(shape=(64, 64, 3))
-vgg = VGG16(weights=None, input_tensor=new_input, classes=2)
-
-model = Sequential()
-# Add the vgg convolutional base model
-model.add(vgg)
-# Add new layers
-model.add(Flatten())
-model.add(Dense(1024, activation='relu'))
-model.add(Dropout(0.5))
-model.add(Dense(2, activation='softmax'))
-
+model = VGG16(weights=None, input_tensor=new_input, classes=2)
 model.compile(loss="categorical_crossentropy", optimizer="adam",
               metrics=["accuracy"])
 
