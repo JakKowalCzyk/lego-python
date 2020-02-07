@@ -49,7 +49,7 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     label = "Legos" if label == "Legos" else "Bricks"
     labels.append(label)
 
-data = np.array(data, dtype=np.float32) / 255.0
+# data = np.array(data, dtype=np.float32) / 255.0
 labels = np.array(labels)
 
 print(labels)
@@ -73,11 +73,11 @@ print(testY)
 
 # initialize the model
 print("[INFO] compiling model...")
-sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+# sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 
 new_input = Input(shape=(64, 64, 3))
 model = VGG16(weights=None, input_tensor=new_input, classes=2)
-model.compile(loss="categorical_crossentropy", optimizer=sgd,
+model.compile(loss="categorical_crossentropy", optimizer="adam",
               metrics=["accuracy"])
 
 # train the network
