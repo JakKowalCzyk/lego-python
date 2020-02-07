@@ -33,11 +33,7 @@ labels = []
 
 # loop over the input images
 for imagePath in sorted(list(paths.list_images(args["dataset"]))):
-    # load the image, pre-process it, and store it in the data list
-    # image = cv2.imread(imagePath)
-    # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    # image = imutils.resize(image, width=64, height=64)
-    # image = cv2.resize(image, (64, 64))
+
     image = load_img(imagePath, target_size=(128,128))
     image = img_to_array(image)
     # image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
