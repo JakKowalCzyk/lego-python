@@ -71,7 +71,7 @@ classWeight = classTotals.max() / classTotals
 print("[INFO] compiling model...")
 model = CNN.build()
 model.compile(loss='categorical_crossentropy',
-              optimizer='rmsprop',
+              optimizer='adam',
               metrics=['accuracy'])
 # train the network
 print("[INFO] training network...")
