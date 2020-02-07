@@ -13,6 +13,7 @@ import os
 from keras.preprocessing.image import array_to_img, img_to_array, load_img
 from lenet import LeNet
 from sklearn.datasets import load_files
+from keras.optimizers import SGD
 
 # construct argument parser and parse the argument
 ap = argparse.ArgumentParser()
@@ -32,41 +33,49 @@ for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     image = cv2.imread(imagePath)
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # image = imutils.resize(image, width=64, height=64)
-    image = cv2.resize(image, (128, 128))
+    image = cv2.resize(image, (64, 64))
     image = img_to_array(image)
     data.append(image)
 
     # extract the class label from the image path and update the label list
-    label = imagePath.split(os.path.sep)[-3]
+    label = imagePath.split(os.path.sep)[-2]
     label = "Legos" if label == "Legos" else "Bricks"
     labels.append(label)
 
-data = np.array(data, dtype=np.float32)
+data = np.array(data, dtype=np.float32) / 255.0
 labels = np.array(labels)
 
+print(labels)
 # convert the labels from integers to vectors
 le = LabelEncoder().fit(labels)
+print(le)
 labels = np_utils.to_categorical(le.transform(labels), 2)
 
 # account for skew in the labeled data
 classTotals = labels.sum(axis = 0)
 classWeight = classTotals.max() / classTotals
-
+print(classTotals)
+print(classWeight)
 # partition the data into training and testing splits using 80% of the data
 # for training and remaining 20% for testing
 (trainX, testX, trainY, testY) = train_test_split(data, labels,
     test_size = 0.20, stratify = labels, random_state = 42)
 
+print(trainY)
+print(testY)
+
 # initialize the model
 print("[INFO] compiling model...")
-model = LeNet.build(width = 128, height = 128, depth = 1, classes = 2)
-model.compile(loss = "binary_crossentropy", optimizer = "adam",
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+
+model = LeNet.build(width = 64, height = 64, depth = 1, classes = 2)
+model.compile(loss = "categorical_crossentropy", optimizer = sgd,
     metrics = ["accuracy"])
 
 # train the network
 print("[INFO] training network...")
 H = model.fit(trainX, trainY, validation_data = (testX, testY),
-    class_weight = classWeight, batch_size = 64, epochs = 15, verbose = 1)
+    class_weight = classWeight, batch_size = 34, epochs = 40, verbose = 1)
 
 # evaluate the network
 print("[INFO] evaluating network...")
