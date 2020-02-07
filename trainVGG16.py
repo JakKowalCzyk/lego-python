@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from imutils import paths
 from keras.optimizers import SGD
-from keras.preprocessing.image import img_to_array
+from keras.preprocessing.image import img_to_array, load_img
 from keras.utils import np_utils
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
@@ -33,10 +33,11 @@ labels = []
 # loop over the input images
 for imagePath in sorted(list(paths.list_images(args["dataset"]))):
     # load the image, pre-process it, and store it in the data list
-    image = cv2.imread(imagePath)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # image = cv2.imread(imagePath)
+    # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # image = imutils.resize(image, width=64, height=64)
-    image = cv2.resize(image, (64, 64))
+    # image = cv2.resize(image, (64, 64))
+    image = load_img(imagePath, target_size=(224,224))
     image = img_to_array(image)
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     # prepare the image for the VGG model
