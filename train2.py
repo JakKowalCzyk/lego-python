@@ -1,4 +1,5 @@
 from keras.callbacks import ModelCheckpoint
+from keras.optimizers import SGD
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -69,9 +70,11 @@ classWeight = classTotals.max() / classTotals
 
 # initialize the model
 print("[INFO] compiling model...")
+sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
+
 model = CNN.build()
 model.compile(loss='categorical_crossentropy',
-              optimizer='adam',
+              optimizer=sgd,
               metrics=['accuracy'])
 # train the network
 print("[INFO] training network...")
