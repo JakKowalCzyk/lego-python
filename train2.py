@@ -75,7 +75,7 @@ model.compile(loss='categorical_crossentropy',
               metrics=['accuracy'])
 # train the network
 print("[INFO] training network...")
-checkpointer = ModelCheckpoint(filepath = 'cnn_from_scratch_fruits.hdf5', verbose = 1, save_best_only = True)
+checkpointer = ModelCheckpoint(filepath = 'cnn_lego.hdf5', verbose = 1, save_best_only = True)
 H = model.fit(trainX,trainY,
         batch_size = 32,
         epochs=40,
